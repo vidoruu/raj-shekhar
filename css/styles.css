@@ -3,11 +3,11 @@
    ========================================================================== */
 :root {
   /* Color Palette - Contemporary Spiritual Light Luxury */
-  --bg-obsidian: #faf8f4; /* Alabaster Off-White background */
-  --bg-deep-space: #f4f0e6; /* Soft Champagne Beige */
-  --bg-indigo: #eae4d8; /* Light Muted Sand Clay */
-  --card-bg-glass: rgba(255, 255, 255, 0.85);
-  --card-bg-glass-hover: rgba(255, 255, 255, 0.98);
+  --bg-obsidian: #f7f4eb; /* Light Warm Off-White Sand */
+  --bg-deep-space: #eee9db; /* Soft Warm Cream Sand */
+  --bg-indigo: #e3dbc7; /* Light Sand Clay */
+  --card-bg-glass: rgba(255, 255, 255, 0.75);
+  --card-bg-glass-hover: rgba(255, 255, 255, 0.96);
   
   --text-white: #1b1d1f; /* Deep Espresso Charcoal primary text */
   --text-silver: #43484e; /* Slate Charcoal secondary text */
@@ -680,7 +680,7 @@ ul {
 .form-card {
   width: 100%;
   max-width: 420px;
-  background: #faf8f4;
+  background: #ffffff;
   border: 1px solid rgba(156, 119, 60, 0.25);
   border-radius: 4px;
   padding: 40px 30px;
@@ -1554,7 +1554,7 @@ ul {
 .modal-content {
   width: 100%;
   max-width: 460px;
-  background: #faf8f4;
+  background: var(--bg-obsidian);
   border: 1px solid rgba(156, 119, 60, 0.25);
   padding: 45px 35px;
   text-align: center;
