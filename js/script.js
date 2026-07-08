@@ -1,5 +1,27 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+  // Dynamic pretty URLs fallback for local testing (file:/// protocol)
+  if (window.location.protocol === 'file:') {
+    document.querySelectorAll('a[href]').forEach(a => {
+      const href = a.getAttribute('href');
+      if (href && 
+          !href.startsWith('http') && 
+          !href.startsWith('https') && 
+          !href.startsWith('tel:') && 
+          !href.startsWith('mailto:') && 
+          !href.startsWith('#')) {
+        
+        const parts = href.split('#');
+        let path = parts[0];
+        const hash = parts[1] ? '#' + parts[1] : '';
+        
+        if (path && !path.includes('.')) {
+          a.setAttribute('href', path + '.html' + hash);
+        }
+      }
+    });
+  }
+
   // ==========================================================================
   // SELECTORS & CONFIGURATION
   // ==========================================================================
@@ -180,7 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
           heroForm.reset();
           heroSubmitBtn.disabled = false;
           heroSubmitBtn.innerHTML = '<span>Connect Now for Solution</span><span class="submit-arrow">&rarr;</span>';
-        }, 1200);
+        }, 600);
       } else {
         // Focus first invalid element
         if (!nameOk) nameInput.focus();
@@ -241,8 +263,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
           secondaryForm.reset();
           secSubmitBtn.disabled = false;
-          secSubmitBtn.textContent = "Send Message to Aacharya Shastri";
-        }, 1200);
+          secSubmitBtn.textContent = "Send Message to Raj Shekhar";
+        }, 600);
       } else {
         if (!nameOk) secNameInput.focus();
         else if (!phoneOk) secPhoneInput.focus();
