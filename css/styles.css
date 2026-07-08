@@ -30,8 +30,8 @@
   --font-sans: 'Outfit', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
   /* Animations & Transitions */
-  --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  --transition-fast: all 0.25s ease;
+  --transition-smooth: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast: transform 0.2s ease, opacity 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
 }
 
 /* ==========================================================================
@@ -465,8 +465,10 @@ ul {
 }
 
 .btn-card-more {
-  display: block;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
   border: 1px solid var(--gold-primary);
   color: var(--text-charcoal);
   padding: 10px;
@@ -476,13 +478,21 @@ ul {
   letter-spacing: 1px;
   font-weight: 500;
   transition: var(--transition-fast);
-  margin-bottom: 8px;
+  margin-bottom: 0;
 }
 
 .btn-card-more:hover {
   background: var(--gold-gradient);
   color: #ffffff !important;
   border-color: transparent;
+}
+
+.btn-arrow {
+  transition: transform 0.2s ease;
+}
+
+.btn-card-more:hover .btn-arrow {
+  transform: translateX(4px);
 }
 
 /* Subpages Detail Grid & Cards styling */
@@ -800,18 +810,55 @@ ul {
 .service-card {
   background: var(--card-bg-glass);
   border: 1px solid rgba(156, 119, 60, 0.15);
-  border-radius: 4px;
+  border-radius: 6px;
   padding: 40px 30px;
   display: flex;
   flex-direction: column;
+  transition: var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: transparent;
   transition: var(--transition-smooth);
 }
 
 .service-card:hover {
   background: var(--card-bg-glass-hover);
-  border-color: var(--gold-primary);
-  transform: translateY(-4px);
+  border-color: rgba(156, 119, 60, 0.35);
+  transform: translateY(-5px);
   box-shadow: 0 15px 40px rgba(156, 119, 60, 0.08);
+}
+
+.service-card:hover::before {
+  background: var(--gold-gradient);
+}
+
+.card-header-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.card-number {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: rgba(156, 119, 60, 0.35);
+  font-weight: 500;
+  transition: var(--transition-smooth);
+}
+
+.service-card:hover .card-number {
+  color: var(--gold-primary);
+  transform: translateY(-2px);
 }
 
 .service-icon {
@@ -822,14 +869,13 @@ ul {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  margin-bottom: 1.5rem;
   padding-bottom: 12px;
   transition: var(--transition-smooth);
 }
 
 .service-card:hover .service-icon {
   border-bottom-color: var(--gold-primary);
-  transform: translateX(5px);
+  transform: scale(1.05);
 }
 
 .service-title {
