@@ -314,6 +314,18 @@ ul {
   z-index: 10;
 }
 
+.logo-img {
+  height: 64px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  transition: opacity 0.25s ease;
+}
+
+.logo:hover .logo-img {
+  opacity: 0.85;
+}
+
 .zodiac-icon {
   background: transparent;
   color: var(--gold-primary);
@@ -1129,6 +1141,30 @@ ul {
   justify-content: center;
   gap: 6px;
   background-color: rgba(255, 255, 255, 0.6);
+}
+
+.award-img-wrap {
+  width: 160px;
+  height: 160px;
+  margin: 0 auto 2rem;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(156, 119, 60, 0.25);
+  box-shadow: 0 6px 24px rgba(156, 119, 60, 0.12);
+  background-color: rgba(255, 255, 255, 0.08);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.award-card:hover .award-img-wrap {
+  transform: scale(1.04);
+  box-shadow: 0 12px 36px rgba(156, 119, 60, 0.22);
+}
+
+.award-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
 
 .visual-label {
