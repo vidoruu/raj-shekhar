@@ -1627,6 +1627,20 @@ ul {
   border-radius: 4px;
 }
 
+/* ==========================================================================
+   HERO IMAGE PLACEHOLDER
+   ========================================================================== */
+.hero-visual-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.hero-visual-container .visual-placeholder-container {
+  max-width: 420px;
+}
+
 
 /* ==========================================================================
    MEDIA QUERIES (RESPONSIVENESS & NO HORIZONTAL SCROLL)
@@ -1715,7 +1729,8 @@ ul {
     align-items: center;
   }
   
-  .hero-form-container {
+  .hero-form-container,
+  .hero-visual-container {
     justify-content: center;
   }
   
