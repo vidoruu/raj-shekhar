@@ -1036,7 +1036,7 @@ ul {
 
 .visual-placeholder-container {
   width: 100%;
-  aspect-ratio: 4/5;
+  aspect-ratio: 2/3;
   position: relative;
   padding: 12px;
   border: 1px solid rgba(156, 119, 60, 0.2);
@@ -1068,6 +1068,24 @@ ul {
   border: 1px solid rgba(156, 119, 60, 0.15);
   position: relative;
   overflow: hidden;
+  border-radius: 2px;
+}
+
+.about-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border: 1px solid rgba(156, 119, 60, 0.15);
+  border-radius: 2px;
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border: 1px solid rgba(156, 119, 60, 0.15);
   border-radius: 2px;
 }
 
@@ -1914,5 +1932,81 @@ ul {
   .footer-bottom-container {
     flex-direction: column;
     text-align: center;
+  }
+}
+
+/* Testimonials Carousel Animation Layout */
+.testimonials-carousel-container {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 40px auto 0;
+  overflow: hidden;
+}
+
+.testimonials-carousel-container .testimonials-grid {
+  display: flex;
+  flex-direction: row;
+  grid-template-columns: none !important;
+  gap: 0 !important;
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+  width: 100%;
+}
+
+.testimonials-carousel-container .testimonial-card-wrapper {
+  flex: 0 0 33.333%;
+  width: 33.333%;
+  box-sizing: border-box;
+  padding: 0 12px;
+  margin: 0 !important;
+  display: flex;
+}
+
+.testimonials-carousel-container .testimonial-card {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 !important;
+  min-height: 250px;
+  border: 1px solid rgba(156, 119, 60, 0.18);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+}
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgba(156, 119, 60, 0.25);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.carousel-dot.active {
+  background-color: var(--gold-primary);
+  transform: scale(1.2);
+}
+
+@media (max-width: 1024px) {
+  .testimonials-carousel-container .testimonial-card-wrapper {
+    flex: 0 0 50%;
+    width: 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  .testimonials-carousel-container .testimonial-card-wrapper {
+    flex: 0 0 100%;
+    width: 100%;
+    padding: 0;
   }
 }

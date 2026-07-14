@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================================================
   // SELECTORS & CONFIGURATION
   // ==========================================================================
-  const ASTRO_PHONE = "919909912345"; // WhatsApp format (without + symbol)
+  const ASTRO_PHONE = "919054472001"; // WhatsApp format (without + symbol)
   
   // Hero Lead Form Elements
   const heroForm = document.getElementById('hero-lead-form');
@@ -277,7 +277,132 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================================================
   // INTERACTIVE BEHAVIORS & ENHANCEMENTS
   // ==========================================================================
+  // Testimonials Carousel Logic
+  const carousels = document.querySelectorAll('.testimonials-carousel-container');
+  carousels.forEach(carousel => {
+    const grid = carousel.querySelector('.testimonials-grid');
+    const cards = carousel.querySelectorAll('.testimonial-card-wrapper');
+    if (!grid || cards.length === 0) return;
 
+    let currentIndex = 0;
+    let autoScrollInterval = null;
+
+    // Create dots container
+    const dotsContainer = document.createElement('div');
+    dotsContainer.className = 'carousel-dots';
+    carousel.appendChild(dotsContainer);
+
+    function getCardsPerSlide() {
+      if (window.innerWidth <= 768) return 1;
+      if (window.innerWidth <= 1024) return 2;
+      return 3;
+    }
+
+    // Shifting card by card. The width of each wrapper translates by 100/visible%
+    function getStepPercentage() {
+      return 100 / getCardsPerSlide();
+    }
+
+    function getMaxIndex() {
+      return cards.length - getCardsPerSlide();
+    }
+
+    function rebuildDots() {
+      dotsContainer.innerHTML = '';
+      const maxIdx = getMaxIndex();
+      
+      if (maxIdx <= 0) return;
+
+      for (let i = 0; i <= maxIdx; i++) {
+        const dot = document.createElement('button');
+        dot.className = `carousel-dot${i === currentIndex ? ' active' : ''}`;
+        dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+        dot.addEventListener('click', () => {
+          goToSlide(i);
+          resetAutoScroll();
+        });
+        dotsContainer.appendChild(dot);
+      }
+    }
+
+    function goToSlide(index) {
+      const maxIdx = getMaxIndex();
+      if (maxIdx <= 0) {
+        grid.style.transform = 'translateX(0)';
+        return;
+      }
+      
+      if (index < 0) index = maxIdx;
+      if (index > maxIdx) index = 0;
+      
+      currentIndex = index;
+      const step = getStepPercentage();
+      grid.style.transform = `translateX(-${currentIndex * step}%)`;
+      
+      const dots = dotsContainer.querySelectorAll('.carousel-dot');
+      dots.forEach((dot, idx) => {
+        if (idx === currentIndex) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+    }
+
+    function startAutoScroll() {
+      if (getMaxIndex() <= 0) return;
+      autoScrollInterval = setInterval(() => {
+        goToSlide(currentIndex + 1);
+      }, 4500);
+    }
+
+    function resetAutoScroll() {
+      clearInterval(autoScrollInterval);
+      startAutoScroll();
+    }
+
+    let startX = 0;
+    let isSwiping = false;
+
+    carousel.addEventListener('touchstart', (e) => {
+      if (getMaxIndex() <= 0) return;
+      startX = e.touches[0].clientX;
+      isSwiping = true;
+      clearInterval(autoScrollInterval);
+    }, { passive: true });
+
+    carousel.addEventListener('touchmove', (e) => {
+      if (!isSwiping) return;
+      const currentX = e.touches[0].clientX;
+      const diffX = startX - currentX;
+      if (Math.abs(diffX) > 50) {
+        if (diffX > 0) {
+          goToSlide(currentIndex + 1);
+        } else {
+          goToSlide(currentIndex - 1);
+        }
+        isSwiping = false;
+        startAutoScroll();
+      }
+    }, { passive: true });
+
+    carousel.addEventListener('touchend', () => {
+      isSwiping = false;
+    });
+
+    window.addEventListener('resize', () => {
+      const maxIdx = getMaxIndex();
+      if (currentIndex > maxIdx) {
+        currentIndex = Math.max(0, maxIdx);
+      }
+      rebuildDots();
+      goToSlide(currentIndex);
+    });
+
+    rebuildDots();
+    goToSlide(currentIndex);
+    startAutoScroll();
+  });
   // Automatically update footer copyright year dynamically (fallback if not 2026)
   const copyrightElem = document.querySelector('.footer-bottom p');
   if (copyrightElem) {
