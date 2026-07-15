@@ -2105,3 +2105,34 @@ ul {
     display: flex;
   }
 }
+
+/* ==========================================================================
+   MOBILE PERFORMANCE OPTIMIZATIONS
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* Disable heavy rendering operations */
+  .card-glass, .detail-card-glass, .service-card, .main-header, .mobile-nav-drawer, .modal, .dropdown-menu {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  
+  /* Fallback solid backgrounds */
+  .main-header, .mobile-nav-drawer {
+    background: #faf8f4 !important;
+  }
+  
+  .card-glass, .detail-card-glass, .service-card {
+    background: #ffffff !important;
+  }
+
+  /* Remove large background blurs */
+  .glow-orb {
+    display: none !important;
+  }
+
+  /* Pause background continuous animations */
+  .astro-bg-circles {
+    animation: none !important;
+    border: 1px solid rgba(156, 119, 60, 0.15);
+  }
+}
