@@ -1,27 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  // Dynamic pretty URLs fallback for local testing (file:/// protocol)
-  if (window.location.protocol === 'file:') {
-    document.querySelectorAll('a[href]').forEach(a => {
-      const href = a.getAttribute('href');
-      if (href && 
-          !href.startsWith('http') && 
-          !href.startsWith('https') && 
-          !href.startsWith('tel:') && 
-          !href.startsWith('mailto:') && 
-          !href.startsWith('#')) {
-        
-        const parts = href.split('#');
-        let path = parts[0];
-        const hash = parts[1] ? '#' + parts[1] : '';
-        
-        if (path && !path.includes('.')) {
-          a.setAttribute('href', path + '.html' + hash);
-        }
-      }
-    });
-  }
-
   // ==========================================================================
   // SELECTORS & CONFIGURATION
   // ==========================================================================
@@ -403,6 +381,30 @@ document.addEventListener('DOMContentLoaded', () => {
     goToSlide(currentIndex);
     startAutoScroll();
   });
+  // Mobile Menu Toggle Logic
+  const menuToggle = document.querySelector('.mobile-menu-toggle');
+  const navDrawer = document.querySelector('.mobile-nav-drawer');
+  const navLinks = document.querySelectorAll('.mobile-navigation a');
+
+  if (menuToggle && navDrawer) {
+    menuToggle.addEventListener('click', () => {
+      const isOpen = menuToggle.classList.toggle('active');
+      navDrawer.classList.toggle('active');
+      menuToggle.setAttribute('aria-expanded', isOpen);
+      navDrawer.setAttribute('aria-hidden', !isOpen);
+    });
+
+    // Close menu when clicking a link
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        menuToggle.classList.remove('active');
+        navDrawer.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        navDrawer.setAttribute('aria-hidden', 'true');
+      });
+    });
+  }
+
   // Automatically update footer copyright year dynamically (fallback if not 2026)
   const copyrightElem = document.querySelector('.footer-bottom p');
   if (copyrightElem) {
