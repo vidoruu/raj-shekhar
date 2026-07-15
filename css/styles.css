@@ -1035,6 +1035,10 @@ ul {
   position: relative;
 }
 
+.about-visual .visual-placeholder-container {
+  aspect-ratio: 1 / 1;
+}
+
 .visual-placeholder-container {
   width: 100%;
   aspect-ratio: 2/3;
@@ -1729,7 +1733,6 @@ ul {
 
 .hero-visual-container .visual-placeholder-container {
   max-width: 420px;
-  aspect-ratio: 1 / 1;
 }
 
 
