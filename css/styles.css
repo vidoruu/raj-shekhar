@@ -1269,6 +1269,13 @@ ul {
   transition: var(--transition-smooth);
 }
 
+.gallery-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 .gallery-item .visual-label {
   font-size: 0.75rem;
   color: var(--text-silver);
@@ -1722,6 +1729,7 @@ ul {
 
 .hero-visual-container .visual-placeholder-container {
   max-width: 420px;
+  aspect-ratio: 1 / 1;
 }
 
 
